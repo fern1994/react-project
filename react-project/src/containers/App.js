@@ -12,7 +12,7 @@ class App extends Component{
   }
   componentDidMount(){
     console.log("componentDidMount");
-    fetch('https://jsonplaceholder.typicode.com/posts')
+    fetch('https://agile-cliffs-83142.herokuapp.com/api/news')
       .then(res => res.json())
       .then(posts => this.setState({ news: posts }));
   }

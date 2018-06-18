@@ -9,9 +9,9 @@ const Header = () => {
           <img src={logo} className="dib w2 h2 br-100" alt="Site Name" />
         </a>
         <div className="dtc v-mid w-75 tr">
-          <a className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns" href="/" title="About">Home</a>
+          <a className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns" href="/register" title="About">Register</a>
           <a className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns" href="/show" title="Store">About</a>
-          <a className="link dim dark-gray f6 f5-ns dib" href="/" title="Contact">Login</a>
+          <a className="link dim dark-gray f6 f5-ns dib" href="/addNews" title="Contact">Login</a>
         </div>
       </nav>
     </div>

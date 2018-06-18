@@ -13,8 +13,8 @@ const FeedList = ({news}) => {
              key={i}
              id={post.id}
              title={post.title}
-             body={post.body}
-             user={post.userId}
+             detail={post.detail}
+             user={post.user}
             />
           );
         })

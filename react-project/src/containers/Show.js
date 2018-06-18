@@ -11,13 +11,16 @@ class Show extends Component{
     }
   }
   componentDidMount(){
+    console.log(this.props);
     const { match: { params } } = this.props;
-    fetch(`https://jsonplaceholder.typicode.com/posts/${ params.postId }`)
+    fetch(`https://agile-cliffs-83142.herokuapp.com/api/news/${params.postId}`)
       .then(res => res.json())
-      .then(posts => this.setState({ news: posts }));
+      .then(posts => this.setState({ news: posts[0] }));
+
   }
   render(){
     const {news} = this.state;
+    console.log(news);
     return(
       <div>
         <Header />
