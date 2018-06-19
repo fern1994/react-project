@@ -1,5 +1,6 @@
 import React from 'react';
 import FontAwesome from 'react-fontawesome';
+import ButtonManage from './ButtonMange';
 
 const Feed = ({id,title,detail,user}) => {
   return(
@@ -21,6 +22,7 @@ const Feed = ({id,title,detail,user}) => {
           </div>
         </div>
       </a>
+      <ButtonManage postId={id}/>
     </article>
   )
 }

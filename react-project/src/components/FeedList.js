@@ -3,7 +3,7 @@ import Feed from './Feed';
 
 const FeedList = ({news}) => {
   return(
-    <div className="mt5 pt2">
+    <div className="mt5 pt2 min-vh-100">
       <section className="mw7 center avenir">
        <h2 className="baskerville fw1 ph3 ph0-l">News</h2>
        {
