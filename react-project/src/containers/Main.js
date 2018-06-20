@@ -25,16 +25,10 @@ class Main extends Component{
     return(
       <Router>
           <div>
-            <Route exact path="/"  render={() => (
-              localStorage.getItem("userId") ? (
-                <Redirect to="/manage"/>
-              ) : (
-                <App/>
-              )
-            )}/>
+            <Route exact path="/" component={App}/>
             <Route path="/news/:postId" component={Show}/>
             <PrivateRoute path="/addNews" component={AddNews} />
-            <Route path="/register" component={AddNews}/>
+            <Route path="/register" component={AddUser}/>
             <PrivateRoute path="/editNews/:postId" component={EditNews}/>
             <Route path="/login" component={Login} />
             <PrivateRoute path='/manage' component={Manage} />

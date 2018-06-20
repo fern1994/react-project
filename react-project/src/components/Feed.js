@@ -22,7 +22,7 @@ const Feed = ({id,title,detail,user}) => {
           </div>
         </div>
       </a>
-      <ButtonManage postId={id}/>
+      <ButtonManage postId={id} userId={user}/>
     </article>
   )
 }
