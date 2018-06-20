@@ -28,6 +28,10 @@ class EditNews extends Component{
   }
   editNews(){
     var data =  new FormData(document.querySelector('form'));
+    // console.log(JSON.stringify({
+    //    title: data.get('title'),
+    //      detail: data.get('detail'),
+    //   }),this.state.id);
       fetch(`https://agile-cliffs-83142.herokuapp.com/api/news/${this.state.id}`, {
       method: 'PUT',
       body: JSON.stringify({
@@ -39,7 +43,10 @@ class EditNews extends Component{
       }
     })
     .then(response => response.json())
-    .then(json => console.log(json))
+    .then(json => {
+      alert("success"); 
+      window.location.href = "/manage"
+    })
   }
   render(){
     return(

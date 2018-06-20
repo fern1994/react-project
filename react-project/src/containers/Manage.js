@@ -11,7 +11,8 @@ class Manage extends Component{
     }
   }
   componentDidMount(){
-    fetch('https://agile-cliffs-83142.herokuapp.com/api/user/1/news')
+    const userId = JSON.parse(localStorage.getItem("userId"))
+    fetch(`https://agile-cliffs-83142.herokuapp.com/api/user/${userId}/news`)
     .then(res => res.json())
     .then(posts => this.setState({ news: posts }));
 

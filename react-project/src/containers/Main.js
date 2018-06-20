@@ -6,20 +6,38 @@ import AddUser from '../containers/AddUser';
 import Manage from '../containers/Manage';
 import EditNews from '../containers/EditNews';
 import Login from '../containers/Login';
-import { BrowserRouter as Router, Route} from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect} from "react-router-dom";
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={(props) => (
+    localStorage.getItem("userId")
+      ? <Component {...props} />
+      : <Redirect to={{
+          pathname: '/login',
+          state: { from: props.location }
+        }} />
+  )} />
+)
 
 class Main extends Component{
+
   render(){
     return(
       <Router>
           <div>
-            <Route exact path="/" component={App} />
-            <Route path="/news/:postId" component={Show} />
-            <Route path="/addNews" component={AddNews} />
-            <Route path="/register" component={AddUser} />
-            <Route path="/manage" component={Manage} />
-            <Route path="/editNews/:postId" component={EditNews} />
+            <Route exact path="/"  render={() => (
+              localStorage.getItem("userId") ? (
+                <Redirect to="/manage"/>
+              ) : (
+                <App/>
+              )
+            )}/>
+            <Route path="/news/:postId" component={Show}/>
+            <PrivateRoute path="/addNews" component={AddNews} />
+            <Route path="/register" component={AddNews}/>
+            <PrivateRoute path="/editNews/:postId" component={EditNews}/>
             <Route path="/login" component={Login} />
+            <PrivateRoute path='/manage' component={Manage} />
          </div>
       </Router>
     )

@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from '../duck.png'
+import HeaderMenu from './HeaderMenu';
 
 const Header = () => {
   return(
@@ -8,11 +9,7 @@ const Header = () => {
         <a className="dtc v-mid mid-gray link dim w-25" href="/" title="Home">
           <img src={logo} className="dib w2 h2 br-100" alt="Site Name" />
         </a>
-        <div className="dtc v-mid w-75 tr">
-          <a className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns" href="/register" title="Register">Register</a>
-          <a className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns" href="/manage" title="Manage">Manage</a>
-          <a className="link dim dark-gray f6 f5-ns dib" href="/addNews" title="Addnew">AddNews</a>
-        </div>
+        <HeaderMenu/>
       </nav>
     </div>
   )

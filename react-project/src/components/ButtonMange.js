@@ -7,7 +7,6 @@ class ButtonManage extends Component{
     this.onDel = this.onDel.bind(this);
   }
   onDel(){
-    console.log(this.state.id);
     fetch(`https://agile-cliffs-83142.herokuapp.com/api/news/${this.state.id}`, {
       method: 'DELETE'
     })

@@ -5,7 +5,9 @@ import Footer from '../components/Footer'
 class Login extends Component{
   constructor(){
     super();
+
     this.onLogin = this.onLogin.bind(this);
+
   }
   onLogin(){
     var data =  new FormData(document.querySelector('form'));
@@ -20,7 +22,19 @@ class Login extends Component{
       }
     })
     .then(response => response.json())
-    .then(json => console.log(json))
+    .then(json => {
+      if(!json.msg){
+        localStorage.setItem("userId", JSON.stringify(json.id))
+        localStorage.setItem("name", JSON.stringify(json.first_name))
+        localStorage.setItem("lastname", JSON.stringify(json.last_name))
+        this.props.history.push("/manage");
+
+      }else{
+        alert("username or password incorrect")
+        // this.props.history.push("/");
+        console.log(this.props.history);
+      }
+    })
   }
   render(){
     return(

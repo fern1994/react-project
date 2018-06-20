@@ -10,14 +10,20 @@ class AddNews extends Component{
       body: JSON.stringify({
         title: data.get('title'),
         detail: data.get('detail'),
-        user: 1
+        user: JSON.parse(localStorage.getItem("userId"))
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8"
       }
     })
     .then(response => response.json())
-    .then(json => console.log(json))
+    .then(json => {
+      if(!json.require){
+        window.location.href = "/manage";
+      }else{
+        alert("please fill title and detail data");
+      }
+    })
   }
   render(){
     return(
