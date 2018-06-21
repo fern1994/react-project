@@ -1,14 +1,34 @@
 import React, { Component } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer'
+import Modal from 'react-responsive-modal';
 
 class Login extends Component{
   constructor(){
     super();
+    this.state = {
+      openAlertModal: false,
+      alerText: ''
+    }
 
+    this.onOpenAlert = this.onOpenAlert.bind(this);
+    this.onCloseAlert = this.onCloseAlert.bind(this);
     this.onLogin = this.onLogin.bind(this);
 
   }
+
+  onOpenAlert(){
+    this.setState({ openAlertModal: true });
+  }
+
+  onCloseAlert(){
+    this.setState({ openAlertModal: false });
+  }
+
+  clickClose(){
+    window.location.href = "/"
+  }
+
   onLogin(){
     var data =  new FormData(document.querySelector('form'));
       fetch('https://agile-cliffs-83142.herokuapp.com/api/user/auth', {
@@ -30,13 +50,14 @@ class Login extends Component{
         this.props.history.push("/manage");
 
       }else{
-        alert("username or password incorrect")
+        this.setState({ openAlertModal: true, alerText: 'username or password incorrect'});
         // this.props.history.push("/");
         console.log(this.props.history);
       }
     })
   }
   render(){
+    const { openAlertModal,alerText } = this.state;
     return(
       <div>
         <Header/>
@@ -53,11 +74,17 @@ class Login extends Component{
             </div>
             <div className="tc">
               <a className="ma2 f6 link dim br1 ba ph3 pv2 mb2 dib black" onClick={this.onLogin}>login</a>
-              <a className="ma2 f6 link dim br1 ba ph3 pv2 mb2 dib near-black">cancel</a>
+              <a className="ma2 f6 link dim br1 ba ph3 pv2 mb2 dib near-black" href="/">cancel</a>
             </div>
           </form>
         </div>
         <Footer/>
+        <Modal open={openAlertModal} onClose={this.onCloseAlert} center>
+          <p>Alert</p>
+          <div className="fixed-modal">
+            <p>{alerText}</p>
+          </div>
+        </Modal>
       </div>
     )
   }

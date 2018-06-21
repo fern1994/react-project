@@ -8,8 +8,8 @@ import EditNews from '../containers/EditNews';
 import Login from '../containers/Login';
 import { BrowserRouter as Router, Route, Redirect} from "react-router-dom";
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} render={(props) => (
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  return <Route {...rest} render={(props) => (
     localStorage.getItem("userId")
       ? <Component {...props} />
       : <Redirect to={{
@@ -17,7 +17,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
           state: { from: props.location }
         }} />
   )} />
-)
+}
 
 class Main extends Component{
 

@@ -1,6 +1,7 @@
 import React,{ Component } from 'react';
 import Header from '../components/Header';
-import Footer from '../components/Footer'
+import Footer from '../components/Footer';
+import Modal from 'react-responsive-modal';
 
 class EditNews extends Component{
   constructor(props){
@@ -9,10 +10,33 @@ class EditNews extends Component{
       id: '',
       title:'',
       detail: '',
+      openConfirmModal: false,
+      openAlertModal: false,
+      confirmText: '',
+      alerText: ''
     }
     this.onTitleChange = this.onTitleChange.bind(this);
     this.onDetailChange = this.onDetailChange.bind(this);
+    this.onOpenConfirmModal = this.onOpenConfirmModal.bind(this);
+    this.onCloseConfirmModal = this.onCloseConfirmModal.bind(this);
+    this.onOpenAlert = this.onOpenAlert.bind(this);
+    this.onCloseAlert = this.onCloseAlert.bind(this);
     this.editNews = this.editNews.bind(this);
+  }
+  onOpenConfirmModal(){
+    this.setState({ openConfirmModal: true, confirmText: 'You want to edit news ?' });
+  }
+
+  onCloseConfirmModal(){
+    this.setState({ openConfirmModal: false });
+  }
+
+  onOpenAlert(){
+    this.setState({ openAlertModal: true });
+  }
+
+  onCloseAlert(){
+    this.setState({ openAlertModal: false });
   }
   componentDidMount(){
     const { match:{ params }} = this.props;
@@ -27,6 +51,7 @@ class EditNews extends Component{
     this.setState({detail: event.target.value})
   }
   editNews(){
+    this.setState({ openConfirmModal: false });
     var data =  new FormData(document.querySelector('form'));
     // console.log(JSON.stringify({
     //    title: data.get('title'),
@@ -44,11 +69,12 @@ class EditNews extends Component{
     })
     .then(response => response.json())
     .then(json => {
-      alert("success"); 
+      this.setState({ openAlertModal: true, alerText: 'Success'});
       window.location.href = "/manage"
     })
   }
   render(){
+    const { openConfirmModal,openAlertModal,confirmText,alerText } = this.state;
     return(
       <div>
         <Header />
@@ -65,11 +91,24 @@ class EditNews extends Component{
             </div>
             <div className="tc">
               <a className="ma2 f6 link dim br1 ba ph3 pv2 mb2 dib black" onClick={ this.editNews }>Add</a>
-              <a className="ma2 f6 link dim br1 ba ph3 pv2 mb2 dib near-black">cancel</a>
+              <a className="ma2 f6 link dim br1 ba ph3 pv2 mb2 dib near-black" href="/manage">cancel</a>
             </div>
           </form>
         </div>
         <Footer />
+        <Modal open={openConfirmModal} onClose={this.onCloseConfirmModal} center>
+          <p>Confirm</p>
+          <p>{confirmText}</p>
+          <button className="f6 link dim br1 ba ph3 pv2 mb2 dib black" onClick={this.editNews}>
+            Yes
+          </button>
+        </Modal>
+        <Modal open={openAlertModal} onClose={this.onCloseAlert} center>
+          <p>Alert</p>
+          <div className="fixed-modal">
+            <p>{alerText}</p>
+          </div>
+        </Modal>
       </div>
     )
   }
