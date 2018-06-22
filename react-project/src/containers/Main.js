@@ -20,7 +20,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 }
 
 class Main extends Component{
-
   render(){
     return(
       <Router>

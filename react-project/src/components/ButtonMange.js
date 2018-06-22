@@ -55,13 +55,13 @@ class ButtonManage extends Component{
     const { openConfirmModal,openAlertModal,confirmText,alerText } = this.state;
     if(JSON.parse(localStorage.getItem("userId")) === this.state.user){
       return(
-      <div className="w-100 pt2 tr">
-        <a className="ma2 f6 link dim br1 ba ph3 pv2 mb2 dib black" href={`/editNews/${this.state.id}`}>edit</a>
-        <a className="ma2 f6 link dim br1 ba ph3 pv2 mb2 dib black" onClick={this.onOpenConfirmModal}>delete</a>
+      <div className="w-100 pt2 tr pv3">
+        <a className="ma2 f6 link dim br1 ba ph3 pv2 mb2 dib green" href={`/editNews/${this.state.id}`}>edit</a>
+        <a className="ma2 f6 link dim br1 ba ph3 pv2 mb2 dib green" onClick={this.onOpenConfirmModal}>delete</a>
         <Modal open={openConfirmModal} onClose={this.onCloseConfirmModal} center>
           <p>Confirm</p>
           <p>{confirmText}</p>
-          <button className="f6 link dim br1 ba ph3 pv2 mb2 dib black" onClick={this.onDel}>
+          <button className="f6 link dim br1 ba ph3 pv2 mb2 dib green" onClick={this.onDel}>
             Yes
           </button>
         </Modal>

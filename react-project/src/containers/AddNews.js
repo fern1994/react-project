@@ -7,43 +7,42 @@ class AddNews extends Component{
   constructor(){
     super();
     this.state = {
+      title: '',
+      detail: '',
       openConfirmModal: false,
       openAlertModal: false,
       confirmText: '',
       alerText: ''
     }
-
-    this.onOpenConfirmModal = this.onOpenConfirmModal.bind(this);
-    this.onCloseConfirmModal = this.onCloseConfirmModal.bind(this);
-    this.onOpenAlert = this.onOpenAlert.bind(this);
-    this.onCloseAlert = this.onCloseAlert.bind(this);
-    this.addNews  = this.addNews.bind(this);
   }
-
-  onOpenConfirmModal(){
+  handleChange = (event) => {
+    event.preventDefault();
+    this.setState({ [event.target.name] :  event.target.value })
+  }
+  onOpenConfirmModal = () => {
     this.setState({ openConfirmModal: true, confirmText: 'You want to add news ?' });
   }
 
-  onCloseConfirmModal(){
+  onCloseConfirmModal = () => {
     this.setState({ openConfirmModal: false });
   }
 
-  onOpenAlert(){
+  onOpenAlert = () => {
     this.setState({ openAlertModal: true });
   }
 
-  onCloseAlert(){
+  onCloseAlert = () => {
     this.setState({ openAlertModal: false });
   }
 
-  addNews(){
+  addNews = () => {
     this.setState({ openConfirmModal: false });
-    var data =  new FormData(document.querySelector('form'));
+    // var data =  new FormData(document.querySelector('form'));
       fetch('https://agile-cliffs-83142.herokuapp.com/api/news', {
       method: 'POST',
       body: JSON.stringify({
-        title: data.get('title'),
-        detail: data.get('detail'),
+        title: this.state.title,
+        detail: this.state.detail,
         user: JSON.parse(localStorage.getItem("userId"))
       }),
       headers: {
@@ -71,23 +70,27 @@ class AddNews extends Component{
           <form className="pa4 black-80">
             <div>
               <label className="f6 b db mb2">Title</label>
-              <input id="title" name="title" className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text"/>
+              <input id="title" name="title" className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" onChange={this.handleChange}/>
             </div>
             <div>
               <label className="f6 b db mb2">Detail</label>
-              <textarea id="detail" name="detail" rows="6" className="db border-box hover-black w-100 ba b--black-20 pa2 br2 mb2"></textarea>
+              <textarea id="detail" name="detail" rows="6" className="db border-box hover-black w-100 ba b--black-20 pa2 br2 mb2" onChange={this.handleChange}></textarea>
             </div>
             <div className="tc">
-              <a className="ma2 f6 link dim br1 ba ph3 pv2 mb2 dib black" onClick={this.onOpenConfirmModal}>Add</a>
-              <a className="ma2 f6 link dim br1 ba ph3 pv2 mb2 dib near-black" href="/">cancel</a>
+              <a className="ma2 f6 link dim br1 ba ph3 pv2 mb2 dib green" onClick={this.onOpenConfirmModal}>Add</a>
+              <a className="ma2 f6 link dim br1 ba ph3 pv2 mb2 dib green" href="/">cancel</a>
             </div>
           </form>
         </div>
         <Footer />
         <Modal open={openConfirmModal} onClose={this.onCloseConfirmModal} center>
           <p>Confirm</p>
-          <p>{confirmText}</p>
-          <button className="f6 link dim br1 ba ph3 pv2 mb2 dib black" onClick={this.addNews}>
+          <div className="fixed-modal">
+            <p>{confirmText}</p>
+            <p>Title : {this.state.title}</p>
+            <p>Detail : {this.state.detail}</p>
+          </div>
+          <button className="f6 link dim br1 ba ph3 pv2 mb2 dib green" onClick={this.addNews}>
             Yes
           </button>
         </Modal>

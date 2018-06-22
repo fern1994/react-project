@@ -5,5 +5,10 @@ body {
 }
 
 .fixed-modal{
-  min-width: 100px;
+  min-width: 250px;
+}
+
+.full-color{
+  background-color: #159957;
+  background-image: linear-gradient(120deg,#155799,#159957);
 }

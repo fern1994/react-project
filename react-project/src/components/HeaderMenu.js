@@ -13,16 +13,16 @@ class HeaderMenu extends Component{
     if(localStorage.getItem("userId")){
       return(
         <div className="dtc v-mid w-75 tr">
-          <a className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns" href="/manage" title="Register">Manage</a>
-          <a className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns" href="/addNews" title="Manage">AddNews</a>
-          <a className="link dim dark-gray f6 f5-ns dib" title="Addnew" onClick={this.isLogout}>Logout</a>
+          <a className="link dim white f6 f5-ns dib mr3 mr4-ns" href="/manage" title="Register">Manage</a>
+          <a className="link dim white f6 f5-ns dib mr3 mr4-ns" href="/addNews" title="Manage">AddNews</a>
+          <a className="link dim white f6 f5-ns dib" title="Addnew" onClick={this.isLogout}>Logout</a>
         </div>
       )
     }else{
       return(
         <div className="dtc v-mid w-75 tr">
-          <a className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns" href="/register" title="Register">Register</a>
-          <a className="link dim dark-gray f6 f5-ns dib mr3 mr4-ns" href="/login" title="Manage">Login</a>
+          <a className="link dim white f6 f5-ns dib mr3 mr4-ns" href="/register" title="Register">Register</a>
+          <a className="link dim white f6 f5-ns dib mr3 mr4-ns" href="/login" title="Manage">Login</a>
         </div>
       )
     }

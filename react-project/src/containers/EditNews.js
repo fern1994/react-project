@@ -15,27 +15,20 @@ class EditNews extends Component{
       confirmText: '',
       alerText: ''
     }
-    this.onTitleChange = this.onTitleChange.bind(this);
-    this.onDetailChange = this.onDetailChange.bind(this);
-    this.onOpenConfirmModal = this.onOpenConfirmModal.bind(this);
-    this.onCloseConfirmModal = this.onCloseConfirmModal.bind(this);
-    this.onOpenAlert = this.onOpenAlert.bind(this);
-    this.onCloseAlert = this.onCloseAlert.bind(this);
-    this.editNews = this.editNews.bind(this);
   }
-  onOpenConfirmModal(){
+  onOpenConfirmModal = () => {
     this.setState({ openConfirmModal: true, confirmText: 'You want to edit news ?' });
   }
 
-  onCloseConfirmModal(){
+  onCloseConfirmModal = () => {
     this.setState({ openConfirmModal: false });
   }
 
-  onOpenAlert(){
+  onOpenAlert = () => {
     this.setState({ openAlertModal: true });
   }
 
-  onCloseAlert(){
+  onCloseAlert = () => {
     this.setState({ openAlertModal: false });
   }
   componentDidMount(){
@@ -44,24 +37,17 @@ class EditNews extends Component{
       .then(res => res.json())
       .then(posts => this.setState({ id: posts[0].id, title: posts[0].title, detail: posts[0].detail }));
   }
-  onTitleChange(event){
-    this.setState({title: event.target.value})
+  handleChange = (event) => {
+    event.preventDefault();
+    this.setState({ [event.target.name] :  event.target.value })
   }
-  onDetailChange(event){
-    this.setState({detail: event.target.value})
-  }
-  editNews(){
+  editNews = () => {
     this.setState({ openConfirmModal: false });
-    var data =  new FormData(document.querySelector('form'));
-    // console.log(JSON.stringify({
-    //    title: data.get('title'),
-    //      detail: data.get('detail'),
-    //   }),this.state.id);
       fetch(`https://agile-cliffs-83142.herokuapp.com/api/news/${this.state.id}`, {
       method: 'PUT',
       body: JSON.stringify({
-        title: data.get('title'),
-        detail: data.get('detail'),
+        title: this.state.title,
+        detail: this.state.detail,
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8"
@@ -83,23 +69,27 @@ class EditNews extends Component{
           <form className="pa4 black-80">
             <div>
               <label className="f6 b db mb2">Title</label>
-              <input id="title" name="title" className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" onChange={this.onTitleChange} value={this.state.title}/>
+              <input id="title" name="title" className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" onChange={this.handleChange} value={this.state.title}/>
             </div>
             <div>
               <label className="f6 b db mb2">Detail</label>
-              <textarea id="detail" name="detail" rows="6" className="db border-box hover-black w-100 ba b--black-20 pa2 br2 mb2" onChange={this.onDetailChange} value={this.state.detail}></textarea>
+              <textarea id="detail" name="detail" rows="6" className="db border-box hover-black w-100 ba b--black-20 pa2 br2 mb2" onChange={this.handleChange} value={this.state.detail}></textarea>
             </div>
             <div className="tc">
-              <a className="ma2 f6 link dim br1 ba ph3 pv2 mb2 dib black" onClick={ this.editNews }>Add</a>
-              <a className="ma2 f6 link dim br1 ba ph3 pv2 mb2 dib near-black" href="/manage">cancel</a>
+              <a className="ma2 f6 link dim br1 ba ph3 pv2 mb2 dib green" onClick={ this.onOpenConfirmModal }>Add</a>
+              <a className="ma2 f6 link dim br1 ba ph3 pv2 mb2 dib green" href="/manage">cancel</a>
             </div>
           </form>
         </div>
         <Footer />
         <Modal open={openConfirmModal} onClose={this.onCloseConfirmModal} center>
           <p>Confirm</p>
-          <p>{confirmText}</p>
-          <button className="f6 link dim br1 ba ph3 pv2 mb2 dib black" onClick={this.editNews}>
+          <div className="fixed-modal">
+            <p>{confirmText}</p>
+            <p>Title : {this.state.title}</p>
+            <p>Detail : {this.state.detail}</p>
+          </div>
+          <button className="f6 link dim br1 ba ph3 pv2 mb2 dib green" onClick={this.editNews}>
             Yes
           </button>
         </Modal>

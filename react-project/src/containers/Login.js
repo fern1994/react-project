@@ -7,6 +7,8 @@ class Login extends Component{
   constructor(){
     super();
     this.state = {
+      username: '',
+      password: '',
       openAlertModal: false,
       alerText: ''
     }
@@ -16,26 +18,24 @@ class Login extends Component{
     this.onLogin = this.onLogin.bind(this);
 
   }
-
-  onOpenAlert(){
+  handleChange = (event) => {
+    event.preventDefault();
+    this.setState({ [event.target.name] :  event.target.value })
+  }
+  onOpenAlert = () => {
     this.setState({ openAlertModal: true });
   }
 
-  onCloseAlert(){
+  onCloseAlert = () => {
     this.setState({ openAlertModal: false });
   }
-
-  clickClose(){
-    window.location.href = "/"
-  }
-
-  onLogin(){
+  onLogin = () => {
     var data =  new FormData(document.querySelector('form'));
       fetch('https://agile-cliffs-83142.herokuapp.com/api/user/auth', {
       method: 'POST',
       body: JSON.stringify({
-        username: data.get('username'),
-        password: data.get('password'),
+        username: this.state.username,
+        password: this.state.password,
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8"
@@ -51,7 +51,6 @@ class Login extends Component{
 
       }else{
         this.setState({ openAlertModal: true, alerText: 'username or password incorrect'});
-        // this.props.history.push("/");
         console.log(this.props.history);
       }
     })
@@ -66,15 +65,15 @@ class Login extends Component{
           <form className="pa4 black-80">
             <div>
               <label className="f6 b db mb2 w-60 center">Username</label>
-              <input name="username" id="username" className="input-reset ba b--black-20 pa2 mb2 db w-60 center" type="text" aria-describedby="name-desc"/>
+              <input name="username" id="username" className="input-reset ba b--black-20 pa2 mb2 db w-60 center" type="text" aria-describedby="name-desc" onChange={this.handleChange}/>
             </div>
             <div>
               <label className="f6 b db mb2 w-60 center">Password</label>
-              <input name="password" id="password" className="input-reset ba b--black-20 pa2 mb2 db w-60 center" type="Password" aria-describedby="name-desc"/>
+              <input name="password" id="password" className="input-reset ba b--black-20 pa2 mb2 db w-60 center" type="Password" aria-describedby="name-desc" onChange={this.handleChange}/>
             </div>
             <div className="tc">
-              <a className="ma2 f6 link dim br1 ba ph3 pv2 mb2 dib black" onClick={this.onLogin}>login</a>
-              <a className="ma2 f6 link dim br1 ba ph3 pv2 mb2 dib near-black" href="/">cancel</a>
+              <a className="ma2 f6 link dim br1 ba ph3 pv2 mb2 dib green" onClick={this.onLogin}>login</a>
+              <a className="ma2 f6 link dim br1 ba ph3 pv2 mb2 dib green" href="/">cancel</a>
             </div>
           </form>
         </div>
