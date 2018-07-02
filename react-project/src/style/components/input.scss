@@ -1,0 +1,18 @@
+input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    transition: 0.5s;
+    outline: none;
+    &:focus {
+        border: 1px solid #AF7AC5;
+    }
+    &.search {
+        background-image: url('../image/searchicon.png');
+        background-position: 10px 10px;
+        background-repeat: no-repeat;
+        padding-left: 45px;
+    }
+}

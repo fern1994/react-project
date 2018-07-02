@@ -1,0 +1,151 @@
+.containerHome {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding-left: 30px;
+  padding-right: 30px;
+  background-color: #fff;
+  min-height: 100vh;
+}
+
+.containerHomeHeader {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.homeHeaderBox {
+  flex: 1;
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  &.--itemCenter {
+    justify-content: center;
+  }
+  &.--itemLeft {
+    justify-content: flex-end;
+  }
+  img {
+    width: 100px;
+  }
+  a {
+    display: inline-block;
+    cursor: pointer;
+    &:hover span {
+      background-color: #000;
+    }
+    span {
+      width: 28px;
+      height: 28px;
+      background-color: #ccc;
+      border-radius: 50%;
+      font-size: 1.2em;
+      color: #fff;
+      margin: 5px;
+      padding: 5px;
+      box-sizing: border-box;
+    }
+  }
+}
+
+.containerMenu {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  .menu {
+    margin: 5px;
+  }
+}
+
+.containerNews {
+  display: flex;
+  flex-wrap: wrap; // align-items: center;
+  .bigHilightNews {
+    flex: 1;
+    padding: 0px 5px 10px 5px;
+    box-sizing: border-box;
+    img {
+      width: 100%;
+    }
+  }
+  .smallHightlightNews {
+    display: flex;
+    flex: 1;
+    flex-flow: row wrap;
+    .news {
+      flex: 33% 1;
+      box-sizing: border-box;
+      padding: 0px 5px 10px 5px;
+      max-width: 33%;
+      .imgNews {
+        img {
+          width: 100%;
+        }
+      }
+      .contentNews {
+        max-height: 65px;
+        overflow: hidden;
+        font-size: 0.9em;
+      }
+    }
+  }
+  .otherNews {
+    display: flex;
+    flex: 1;
+    flex-flow: row wrap;
+    .news {
+      flex: 25% 1;
+      max-width: 25%;
+      box-sizing: border-box;
+      padding: 0px 5px 10px 5px;
+      .imgNews {
+        img {
+          width: 100%;
+        }
+      }
+      .contentNews {
+        max-height: 65px;
+        overflow: hidden;
+        font-size: 0.9em;
+      }
+    }
+  }
+}
+
+.showNewsContainer{
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.showNews {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  flex-direction: column;
+  text-align: left;
+  .newsTitle {
+    flex: 1;
+    margin: 20px 0px;
+    border-bottom: 1px dashed #ccc;
+  }
+  .newsContent {
+    flex: 1;
+    margin: 20px 0px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .containerNews {
+    flex-direction: column;
+    .smallHightlightNews {
+      .news {
+        flex: 50%;
+        max-width: 50%;
+      }
+    }
+    .otherNews {
+      .news {
+        flex: 50%;
+        max-width: 50%;
+      }
+    }
+  }
+}

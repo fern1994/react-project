@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+
 import Header from '../components/Header';
 import Footer from '../components/Footer'
 import FeedList from '../components/FeedList';
+import apiUrl from '../js/config';
 
 class Manage extends Component{
   constructor(){
@@ -12,7 +14,7 @@ class Manage extends Component{
   }
   componentDidMount(){
     const userId = JSON.parse(localStorage.getItem("userId"))
-    fetch(`https://agile-cliffs-83142.herokuapp.com/api/user/${userId}/news`)
+    fetch(`${apiUrl}/${userId}/news`)
     .then(res => res.json())
     .then(posts => this.setState({ news: posts }));
 

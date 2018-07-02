@@ -1,6 +1,7 @@
 import React from 'react';
 
 const ShowDetail = ({news}) => {
+  console.log(news)
   return(
     <div className="mt4-ns mw7 center min-vh-100">
       <article className="pa3 pa5-ns">

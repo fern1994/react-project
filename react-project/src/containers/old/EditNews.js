@@ -1,7 +1,9 @@
 import React,{ Component } from 'react';
+import Modal from 'react-responsive-modal';
+
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import Modal from 'react-responsive-modal';
+import apiUrl from '../js/config';
 
 class EditNews extends Component{
   constructor(props){
@@ -33,7 +35,7 @@ class EditNews extends Component{
   }
   componentDidMount(){
     const { match:{ params }} = this.props;
-    fetch(`https://agile-cliffs-83142.herokuapp.com/api/news/${params.postId}`)
+    fetch(`${apiUrl}/api/news/${params.postId}`)
       .then(res => res.json())
       .then(posts => this.setState({ id: posts[0].id, title: posts[0].title, detail: posts[0].detail }));
   }
@@ -43,7 +45,7 @@ class EditNews extends Component{
   }
   editNews = () => {
     this.setState({ openConfirmModal: false });
-      fetch(`https://agile-cliffs-83142.herokuapp.com/api/news/${this.state.id}`, {
+      fetch(`${apiUrl}/api/news/${this.state.id}`, {
       method: 'PUT',
       body: JSON.stringify({
         title: this.state.title,

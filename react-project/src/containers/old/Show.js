@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer'
 import ShowDetail from '../components/ShowDetail';
+import apiUrl from '../js/config';
 
 class Show extends Component{
   constructor(props){
@@ -13,7 +14,7 @@ class Show extends Component{
   componentDidMount(){
     console.log(this.props);
     const { match: { params } } = this.props;
-    fetch(`https://agile-cliffs-83142.herokuapp.com/api/news/${params.postId}`)
+    fetch(`${apiUrl}/api/news/${params.postId}`)
       .then(res => res.json())
       .then(posts => this.setState({ news: posts[0] }));
 

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import Modal from 'react-responsive-modal';
+
 import Header from '../components/Header';
 import Footer from '../components/Footer'
-import Modal from 'react-responsive-modal';
+import apiUrl from '../js/config';
 
 class AddNews extends Component{
   constructor(){
@@ -38,7 +40,7 @@ class AddNews extends Component{
   addNews = () => {
     this.setState({ openConfirmModal: false });
     // var data =  new FormData(document.querySelector('form'));
-      fetch('https://agile-cliffs-83142.herokuapp.com/api/news', {
+      fetch(`${apiUrl}/api/news`, {
       method: 'POST',
       body: JSON.stringify({
         title: this.state.title,

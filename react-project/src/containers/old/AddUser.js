@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import Header from '../components/Header';
-import Footer from '../components/Footer'
 import Modal from 'react-responsive-modal';
 
+import Header from '../components/Header';
+import Footer from '../components/Footer'
+import apiUrl from '../js/config';
+
 class AddUser extends Component{
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       firstname: '',
       lastname: '',
@@ -60,7 +62,7 @@ class AddUser extends Component{
   onSubmit = () => {
     this.setState({ openConfirmModal: false });
     if(this.state.password === this.state.repassword){
-        fetch('https://agile-cliffs-83142.herokuapp.com/api/user', {
+        fetch(`${apiUrl}/api/user`, {
         method: 'POST',
         body: JSON.stringify({
           first_name: this.state.firstname,
@@ -76,7 +78,8 @@ class AddUser extends Component{
       .then(json =>{
         if(!json.require){
           this.setState({ openAlertModal: true, alerText: 'Success'});
-          window.location.href = "/login";
+          this.props.history.push("/home/login");
+          // window.location.href = "/login";
         }else{
           this.setState({ openAlertModal: true, alerText: 'Please fill user information'});
 

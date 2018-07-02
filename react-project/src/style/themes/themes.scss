@@ -1,0 +1,64 @@
+.App {
+    text-align: center;
+}
+
+.mainContainner {
+    width: 100%;
+    margin: 0 auto;
+    background-color: #F4F6F6;
+    min-height: 100vh;
+}
+
+// form {
+//     padding: 15px;
+// }
+
+// textarea {
+//     width: 100%;
+//     padding: 12px 20px;
+//     margin: 8px 0;
+//     box-sizing: border-box;
+//     border: 1px solid #ccc;
+//     transition: 0.5s;
+//     outline: none;
+//     &:focus {
+//         border: 1px solid #AF7AC5;
+//     }
+// }
+
+// input {
+//     width: 100%;
+//     padding: 12px 20px;
+//     margin: 8px 0;
+//     box-sizing: border-box;
+//     border: 1px solid #ccc;
+//     transition: 0.5s;
+//     outline: none;
+//     &:focus {
+//         border: 1px solid #AF7AC5;
+//     }
+//     &.search {
+//         background-image: url('../searchicon.png');
+//         background-position: 10px 10px;
+//         background-repeat: no-repeat;
+//         padding-left: 45px;
+//     }
+// }
+
+.footer {
+    width: 100%;
+    height: 50px;
+    background-color: #515A5A;
+    text-align: center;
+    color: #fff;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+a{ 
+    text-decoration: none;
+    color:#000;
+}
+
+@import './page/admin_page.scss';
+@import './page/home_page.scss';
